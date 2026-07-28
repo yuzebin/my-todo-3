@@ -1,0 +1,28 @@
+name = "my-todo-3-api"
+main = "src/index.ts"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+# D1 database binding. The database_id below is filled in after running
+# `npm run db:create` (see DEPLOY.md). Wrangler persists the real id to this
+# file automatically once the database exists.
+[[d1_databases]]
+binding = "DB"
+database_name = "my-todo-3"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+migrations_dir = "migrations"
+
+# JWT signing secret. Set via: wrangler secret put JWT_SECRET
+# Do NOT commit the real value. A placeholder here keeps `wrangler dev` working
+# locally; see DEPLOY.md.
+[vars]
+JWT_SECRET = "dev-only-insecure-secret-replace-in-production"
+JWT_TTL_SECONDS = "604800"   # 7 days
+
+# Per-user rate limiting on auth endpoints relies on Cloudflare's built-in
+# rate limiter (optional, v1 fallback: simple in-memory counter).
+# [[unsafe.bindings]]
+# name = "AUTH_RATE_LIMITER"
+# type = "ratelimit"
+# namespace_id = "1001"
+# simple = { limit = 10, period = 60 }

@@ -1,0 +1,11 @@
+# Local dev artifacts
+node_modules/
+dist/
+.wrangler/
+.dev.vars
+
+# Editor / OS
+.DS_Store
+.vscode/
+.idea/
+*.log
